@@ -176,11 +176,11 @@
       <strong>Base API URL:</strong> <code>https://officebali.e1-vhp.com:34443</code>
     </div>
     <h2>API Endpoints</h2>
-    <p>Semua endpoint menggunakan metode POST dengan request body format JSON.</p>
+    <p>All endpoints use POST method with JSON request body.</p>
     <div class="endpoint">
       <h3>1. Get Main Groups</h3>
       <div class="endpoint-header">POST /api/maingroup</div>
-      <p><strong>Description:</strong> Mengambil semua main group yang tersedia.</p>
+      <p><strong>Description:</strong> Retrieve all available main groups.</p>
       <h4>Request Body:</h4>
       <pre><code>
         {}
@@ -211,7 +211,7 @@
     <div class="endpoint">
       <h3>2. Get Sub Groups</h3>
       <div class="endpoint-header">POST /api/subgroup</div>
-      <p><strong>Description:</strong> Mengambil sub group dengan opsi filter berdasarkan main group.</p>
+      <p><strong>Description:</strong> Retrieve subgroups with optional filtering by main group.</p>
       <h4>Request Body:</h4>
       <pre><code>
         {
@@ -233,7 +233,7 @@
             <td><code>main_group_no</code></td>
             <td>int</td>
             <td>0</td>
-            <td>Filter berdasarkan MainGroupNo. Gunakan <code>0</code> untuk semua sub group, atau nomor spesifik untuk filter tertentu (contoh: <code>1</code> untuk FOOD)</td>
+            <td>Filter by MainGroupNo. Use <code>0</code> for all subgroups, or a specific number to filter (e.g., <code>1</code> for FOOD)</td>
           </tr>
         </tbody>
       </table>
@@ -250,13 +250,13 @@
         }
       </code></pre>
       <h4>cURL Examples:</h4>
-      <p>Mengambil semua sub group:</p>
+      <p>Get all sub groups:</p>
       <pre><code>
         curl -X POST https://officebali.e1-vhp.com:34443/api/subgroup \
         -H "Content-Type: application/json" \
         -d '{"main_group_no": 0}'
       </code></pre>
-      <p>Mengambil sub group untuk main group 1:</p>
+      <p>Get sub groups for main group 1:</p>
       <pre><code>
         curl -X POST https://officebali.e1-vhp.com:34443/api/subgroup \
         -H "Content-Type: application/json" \
@@ -267,7 +267,7 @@
     <div class="endpoint">
       <h3>3. Get Inventory</h3>
       <div class="endpoint-header">POST /api/inventory</div>
-      <p><strong>Description:</strong> Mengambil item inventory dengan pagination dan berbagai opsi filter.</p>
+      <p><strong>Description:</strong> Retrieve inventory items with pagination and various filter options.</p>
       <h4>Request Body:</h4>
       <pre><code>
         {
@@ -295,43 +295,43 @@
             <td><code>limit</code></td>
             <td>int</td>
             <td>50</td>
-            <td>Jumlah item yang ditampilkan per halaman</td>
+            <td>Number of items displayed per page</td>
           </tr>
           <tr>
             <td><code>last_article_no</code></td>
             <td>int</td>
             <td>0</td>
-            <td>Cursor untuk pagination. Gunakan <code>0</code> untuk halaman pertama, atau ArticleNo terakhir dari response sebelumnya untuk halaman berikutnya</td>
+            <td>Cursor for pagination. Use <code>0</code> for the first page, or the last ArticleNo from the previous response for the next page</td>
           </tr>
           <tr>
             <td><code>main_group_no</code></td>
             <td>int</td>
             <td>0</td>
-            <td>Filter berdasarkan MainGroupNo. Gunakan <code>0</code> untuk semua, atau nomor spesifik (contoh: <code>1</code> untuk FOOD)</td>
+            <td>Filter by MainGroupNo. Use <code>0</code> for all, or a specific number (e.g., <code>1</code> for FOOD)</td>
           </tr>
           <tr>
             <td><code>sub_group_no</code></td>
             <td>int</td>
             <td>0</td>
-            <td>Filter berdasarkan SubGroupNo. Gunakan <code>0</code> untuk semua, atau nomor spesifik</td>
+            <td>Filter by SubGroupNo. Use <code>0</code> for all, or a specific number</td>
           </tr>
           <tr>
             <td><code>purchase_date_from</code></td>
             <td>string</td>
             <td>""</td>
-            <td>Filter item yang dibeli mulai dari tanggal ini. Gunakan <code>""</code> jika tidak perlu filter. Format: <code>"(DD/MM/YYYY) 1/1/2023"</code></td>
+            <td>Filter items purchased from this date onwards. Use <code>""</code> if no filter needed. Format: <code>"(DD/MM/YYYY) 1/1/2023"</code></td>
           </tr>
           <tr>
             <td><code>purchase_date_to</code></td>
             <td>string</td>
             <td>""</td>
-            <td>Filter item yang dibeli sampai tanggal ini. Gunakan <code>""</code> jika tidak perlu filter. Format: <code>"(DD/MM/YYYY) 12/31/2023"</code></td>
+            <td>Filter items purchased up to this date. Use <code>""</code> if no filter needed. Format: <code>"(DD/MM/YYYY) 12/31/2023"</code></td>
           </tr>
           <tr>
             <td><code>description</code></td>
             <td>string</td>
             <td>""</td>
-            <td>Pencarian berdasarkan deskripsi (partial match, case-insensitive). Gunakan <code>""</code> jika tidak perlu pencarian</td>
+            <td>Search by description (partial match, case-insensitive). Use <code>""</code> if no search needed</td>
           </tr>
         </tbody>
       </table>
@@ -357,12 +357,12 @@
       </code></pre>
       <h4>Response Fields:</h4>
       <ul>
-        <li><strong>data:</strong> Array berisi item-item inventory</li>
-        <li><strong>last_article_no:</strong> ArticleNo dari item terakhir di response ini (gunakan untuk halaman berikutnya)</li>
-        <li><strong>last_article:</strong> Boolean yang menunjukkan apakah masih ada item yang tersedia</li>
+        <li><strong>data:</strong> Array containing inventory items</li>
+        <li><strong>last_article_no:</strong> ArticleNo of the last item in this response (use for next page)</li>
+        <li><strong>last_article:</strong> Boolean indicating whether there are more items available</li>
       </ul>
       <h4>cURL Examples:</h4>
-      <p>Mengambil halaman pertama (default: semua item, 50 per halaman):</p>
+      <p>Get first page (default: all items, 50 per page):</p>
       <pre><code>
         curl -X POST https://officebali.e1-vhp.com:34443/api/inventory \
         -H "Content-Type: application/json" \
@@ -376,7 +376,7 @@
           "description": ""
         }'
       </code></pre>
-      <p>Mengambil halaman berikutnya (ubah <code>last_article_no</code>):</p>
+      <p>Get next page (change <code>last_article_no</code>):</p>
       <pre><code>
         curl -X POST https://officebali.e1-vhp.com:34443/api/inventory \
         -H "Content-Type: application/json" \
@@ -390,7 +390,7 @@
           "description": ""
         }'
       </code></pre>
-      <p>Filter berdasarkan main group 1 (ubah <code>main_group_no</code>):</p>
+      <p>Filter by main group 1 (change <code>main_group_no</code>):</p>
       <pre><code>
         curl -X POST https://officebali.e1-vhp.com:34443/api/inventory \
         -H "Content-Type: application/json" \
@@ -404,7 +404,7 @@
           "description": ""
         }'
       </code></pre>
-      <p>Pencarian berdasarkan deskripsi "Water":</p>
+      <p>Search by description "Water":</p>
       <pre><code>
         curl -X POST https://officebali.e1-vhp.com:34443/api/inventory \
         -H "Content-Type: application/json" \
@@ -418,7 +418,7 @@
           "description": "Water"
         }'
       </code></pre>
-      <p>Filter berdasarkan rentang tanggal pembelian:</p>
+      <p>Filter by purchase date range:</p>
       <pre><code>
         curl -X POST https://officebali.e1-vhp.com:34443/api/inventory \
         -H "Content-Type: application/json" \
@@ -432,7 +432,7 @@
           "description": ""
         }'
       </code></pre>
-      <p>Filter kombinasi (main group 1, sub group 1, dengan pencarian deskripsi):</p>
+      <p>Combined filters (main group 1, sub group 1, with description search):</p>
       <pre><code>
         curl -X POST https://officebali.e1-vhp.com:34443/api/inventory \
         -H "Content-Type: application/json" \
